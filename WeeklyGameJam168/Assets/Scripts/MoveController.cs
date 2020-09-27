@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveController : MonoBehaviour
 {
-    [Range(1,10)] public float jumpVelocity;
+    [Range(1,15)] public float jumpVelocity;
     [Range(1,15)] public float wallJumpVelocityY;
     [Range(1,15)] public float wallJumpVelocityX;
     public float fallMultiplier = 2.5f;
@@ -52,7 +52,7 @@ public class MoveController : MonoBehaviour
          if(Input.GetButtonUp("Horizontal")){
             runInput = false;
         }
-        if(Input.GetButtonDown("Jump") && ((onGround || onWall) || jumpFrameCounter > 0)){
+        if(Input.GetButtonDown("Jump") && ((onGround && !onWall) || jumpFrameCounter > 0)){
             Debug.Log("pressed jump");
             jumpInput = true;
             animator.SetBool("isJumping",jumpInput);
@@ -66,24 +66,25 @@ public class MoveController : MonoBehaviour
             spriteRenderer.flipX = true;
             direction.x = 1;
         }
-       Debug.DrawLine(oldPos, debugPos, color, 2.0f);
-       Debug.DrawLine(transform.position, new Vector3(debugPos.x + rigidbody.velocity.normalized.x,debugPos.y,debugPos.z),Color.red);
-       Debug.DrawLine(transform.position, new Vector3(debugPos.x,debugPos.y + rigidbody.velocity.normalized.y,debugPos.z),Color.green);
-       Debug.DrawLine(transform.position, new Vector3(debugPos.x + rigidbody.velocity.normalized.x,debugPos.y + rigidbody.velocity.normalized.y,debugPos.z),Color.cyan);
+    //    Debug.DrawLine(oldPos, debugPos, color, 2.0f);
+    //    Debug.DrawLine(transform.position, new Vector3(debugPos.x + rigidbody.velocity.normalized.x,debugPos.y,debugPos.z),Color.red);
+    //    Debug.DrawLine(transform.position, new Vector3(debugPos.x,debugPos.y + rigidbody.velocity.normalized.y,debugPos.z),Color.green);
+    //    Debug.DrawLine(transform.position, new Vector3(debugPos.x + rigidbody.velocity.normalized.x,debugPos.y + rigidbody.velocity.normalized.y,debugPos.z),Color.cyan);
     }
 
     void FixedUpdate(){
        oldPos = transform.position;
        checkWallsAndFloor();
-        if(jumpInput && onWall){
-            rigidbody.AddForce(new Vector2(direction.x * wallJumpVelocityX,wallJumpVelocityY),ForceMode2D.Impulse);
-            jumpInput = false;
-            animator.SetBool("isJumping",jumpInput);
-            Debug.Log("wall jump " + direction.x * wallJumpVelocityX);
-            direction.x *= -1;
-            if(spriteRenderer.flipX == false)spriteRenderer.flipX = true; else spriteRenderer.flipX = false; 
+        // if(jumpInput && onWall){
+        //     rigidbody.AddForce(new Vector2(direction.x * wallJumpVelocityX,wallJumpVelocityY),ForceMode2D.Impulse);
+        //     jumpInput = false;
+        //     animator.SetBool("isJumping",jumpInput);
+        //     Debug.Log("wall jump " + direction.x * wallJumpVelocityX);
+        //     direction.x *= -1;
+        //     if(spriteRenderer.flipX == false)spriteRenderer.flipX = true; else spriteRenderer.flipX = false; 
 
-        }else if(jumpInput){
+        // }else
+         if(jumpInput){
             rigidbody.AddForce(Vector2.up * jumpVelocity,ForceMode2D.Impulse);
             jumpInput = false;
             animator.SetBool("isJumping",jumpInput);
@@ -112,8 +113,8 @@ public class MoveController : MonoBehaviour
     }
 
     void checkWallsAndFloor(){
-         if((Physics2D.Linecast(transform.position, wallCheckR.position, 1 << 10) ||
-        Physics2D.Linecast(transform.position, wallCheckL.position, 1 << 10)) && !onGround){
+         if((Physics2D.Linecast(transform.position, wallCheckR.position, 1 << 9) ||
+        Physics2D.Linecast(transform.position, wallCheckL.position, 1 << 9)) && !onGround){
             onWall = true;
         }
         else{
@@ -132,11 +133,12 @@ public class MoveController : MonoBehaviour
             animator.SetBool("onGround",onGround);
         }
         if(runInput && (!onWall && !onGround)){
+            Debug.Log(rigidbody.velocity);
             rigidbody.velocity = new Vector2(-direction.x*runSpeed,rigidbody.velocity.y);
         }else if(runInput && !onWall){
             rigidbody.velocity = new Vector2(-direction.x*runSpeed,rigidbody.velocity.y);
 
-        }else if(onGround){
+        }else{
             rigidbody.velocity = new Vector2(0,rigidbody.velocity.y);
         }
 
@@ -145,5 +147,17 @@ public class MoveController : MonoBehaviour
         if(onGround && (!onWall))color = Color.red;
         if(!onGround && !onWall)color = Color.green;
         if(!onGround && onWall)color = Color.blue;
+    }
+
+    void OnCollisionEnter2D(Collision2D col){
+        if(col.gameObject.tag == "movingPlatform"){
+            this.gameObject.transform.parent = col.gameObject.transform;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D col){
+        if(col.gameObject.tag == "movingPlatform"){
+            this.gameObject.transform.parent = null;
+        }
     }
 }
