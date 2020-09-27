@@ -7,7 +7,7 @@ public class GroundCheck : MonoBehaviour
     public int numChecks = 3;
     public int checkCounter = 0;
     void OnCollisionEnter2D(Collision2D col){
-        Debug.Log("hi");
+       
         checkCounter++;
         if(checkCounter == numChecks)this.GetComponentInParent<MoveController>().onGround = true;
     }
