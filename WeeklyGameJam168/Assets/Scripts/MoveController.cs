@@ -133,7 +133,6 @@ public class MoveController : MonoBehaviour
             animator.SetBool("onGround",onGround);
         }
         if(runInput && (!onWall && !onGround)){
-            Debug.Log(rigidbody.velocity);
             rigidbody.velocity = new Vector2(-direction.x*runSpeed,rigidbody.velocity.y);
         }else if(runInput && !onWall){
             rigidbody.velocity = new Vector2(-direction.x*runSpeed,rigidbody.velocity.y);
@@ -149,10 +148,18 @@ public class MoveController : MonoBehaviour
         if(!onGround && onWall)color = Color.blue;
     }
 
+    public void registerHit(){
+        animator.SetTrigger("hitBySpike");
+        Debug.Log("registering hit");
+    }
+
     void OnCollisionEnter2D(Collision2D col){
+        Debug.Log(col.gameObject.tag);
         if(col.gameObject.tag == "movingPlatform"){
             this.gameObject.transform.parent = col.gameObject.transform;
         }
+
+
     }
 
     void OnCollisionExit2D(Collision2D col){
