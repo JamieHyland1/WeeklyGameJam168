@@ -21,4 +21,11 @@ public class SpikedPlatform : MonoBehaviour
             animator.SetBool("platformFlipped",false);
         }
   }
+
+
+  private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.name == "Hero"){
+              other.gameObject.GetComponent<MoveController>().registerHit();
+        }
+  }
 }
