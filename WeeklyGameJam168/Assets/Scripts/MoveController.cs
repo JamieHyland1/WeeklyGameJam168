@@ -149,7 +149,11 @@ public class MoveController : MonoBehaviour
         if(!onGround && onWall)color = Color.blue;
     }
 
-   
+    public void registerHit()
+    {
+        animator.SetTrigger("hitBySpike");
+        Debug.Log("registering hit");
+    }
 
     void OnCollisionEnter2D(Collision2D col){
         Debug.Log(col.gameObject.tag);
