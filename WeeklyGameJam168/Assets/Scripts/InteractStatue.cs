@@ -32,6 +32,7 @@ public class InteractStatue : MonoBehaviour
                 torch.transform.position = statue.transform.position + new Vector3(-2.7f, +3.1f, 0);
                 torch.transform.parent = statue.transform;
                 anim.SetTrigger("Rotating"); //activates rotating trigger in animator
+                GameObject.FindGameObjectWithTag("ScreenFade").GetComponent<ScreenFadeManager>().FlipScreens();
             }
         }
     }
