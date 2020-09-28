@@ -48,6 +48,7 @@ public class MoveController : MonoBehaviour
     {
         setTrailColor();
         if(!onGround && jumpFrameCounter > 0)jumpFrameCounter--;
+        
         Vector3 debugPos = transform.position;
          if(Input.GetButtonUp("Horizontal")){
             runInput = false;
@@ -148,18 +149,13 @@ public class MoveController : MonoBehaviour
         if(!onGround && onWall)color = Color.blue;
     }
 
-    public void registerHit(){
-        animator.SetTrigger("hitBySpike");
-        Debug.Log("registering hit");
-    }
+   
 
     void OnCollisionEnter2D(Collision2D col){
         Debug.Log(col.gameObject.tag);
         if(col.gameObject.tag == "movingPlatform"){
             this.gameObject.transform.parent = col.gameObject.transform;
         }
-
-
     }
 
     void OnCollisionExit2D(Collision2D col){
