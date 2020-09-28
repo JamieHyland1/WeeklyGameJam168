@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 4892999199312945303}
   - component: {fileID: 4892999199312945302}
   - component: {fileID: 4892999199312945301}
+  - component: {fileID: 9151316921695734063}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -388,6 +389,19 @@ MonoBehaviour:
   groundCheckL: {fileID: 4892999198267794225}
   wallCheckR: {fileID: 4892999199077116897}
   wallCheckL: {fileID: 4892999198014847519}
+--- !u!114 &9151316921695734063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4892999199312945297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8096a72a58a39a64a88ec7d665877944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPoint: {fileID: 0}
 --- !u!1 &4892999199345017440
 GameObject:
   m_ObjectHideFlags: 0
