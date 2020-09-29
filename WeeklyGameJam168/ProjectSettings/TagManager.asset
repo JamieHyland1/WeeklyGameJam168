@@ -9,6 +9,8 @@ TagManager:
   - ScreenFade
   - Statue
   - Torch
+  - Button
+  - Block
   layers:
   - Default
   - TransparentFX
