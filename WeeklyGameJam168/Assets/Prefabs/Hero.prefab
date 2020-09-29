@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4087293861342129237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7510206238944166937}
+  m_Layer: 0
+  m_Name: WallCheckTopR
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7510206238944166937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4087293861342129237}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.33, y: 0.36, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4892999199312945300}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4824572335286105648
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +270,8 @@ Transform:
   - {fileID: 4892999199077116897}
   - {fileID: 4892999198014847519}
   - {fileID: 6829670508650542502}
+  - {fileID: 7510206238944166937}
+  - {fileID: 3538780461656312930}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -329,7 +361,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -373,13 +405,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c64873b6d43ae4c9e15f06d266fdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpVelocity: 5
+  jumpVelocity: 6
   wallJumpVelocityY: 0
   wallJumpVelocityX: 0
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   jumpFrames: 3
   jumpFrameCounter: 0
+  camera: {fileID: 0}
+  dustReference: {fileID: 0}
   runSpeed: 4
   onWall: 0
   onGround: 1
@@ -389,6 +423,8 @@ MonoBehaviour:
   groundCheckL: {fileID: 4892999198267794225}
   wallCheckR: {fileID: 4892999199077116897}
   wallCheckL: {fileID: 4892999198014847519}
+  wallCheckTopR: {fileID: 7510206238944166937}
+  wallCheckTopL: {fileID: 3538780461656312930}
 --- !u!114 &9151316921695734063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,4 +467,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4892999199312945300}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7572753154025408428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3538780461656312930}
+  m_Layer: 0
+  m_Name: WallCheckTopL
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3538780461656312930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7572753154025408428}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.41, y: 0.36, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4892999199312945300}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
