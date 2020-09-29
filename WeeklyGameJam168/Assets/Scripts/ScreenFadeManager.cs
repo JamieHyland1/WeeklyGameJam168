@@ -6,7 +6,8 @@ public class ScreenFadeManager : MonoBehaviour
 {
    public GameObject firstScreen;
    public GameObject secondScreen;
-   public void FlipScreens(){
+   public void FlipScreens()
+    {
            firstScreen.GetComponent<Animator>().SetTrigger("Fade");
            secondScreen.GetComponent<Animator>().SetTrigger("Fade");
    }

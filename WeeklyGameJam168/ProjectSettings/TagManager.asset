@@ -6,6 +6,8 @@ TagManager:
   tags:
   - movingPlatform
   - Spike
+  - ScreenFade
+  - Statue
   layers:
   - Default
   - TransparentFX
