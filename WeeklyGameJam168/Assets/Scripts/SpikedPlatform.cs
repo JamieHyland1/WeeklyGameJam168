@@ -26,9 +26,6 @@ public class SpikedPlatform : MonoBehaviour
             animator.SetBool("platformFlipped",false);
         }
   }
-
-
-<<<<<<< block-push
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
