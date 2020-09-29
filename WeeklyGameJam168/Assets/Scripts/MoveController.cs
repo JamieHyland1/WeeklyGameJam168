@@ -128,8 +128,8 @@ public class MoveController : MonoBehaviour
         }
 
       
-        animator.SetFloat("Speed",Mathf.Abs(rigidbody.velocity.x));
-        animator.SetFloat("ySpeed",rigidbody.velocity.y);
+        animator.SetFloat("Speed",Mathf.Abs(rigid.velocity.x));
+        animator.SetFloat("ySpeed",rigid.velocity.y);
 
         
       
@@ -157,11 +157,11 @@ public class MoveController : MonoBehaviour
         }
 
         if(runInput){
-            rigidbody.velocity = new Vector2(-direction.x*runSpeed,rigidbody.velocity.y);
+            rigid.velocity = new Vector2(-direction.x*runSpeed,rigid.velocity.y);
         }else if(onGround && !runInput){
-            rigidbody.velocity = new Vector2(0,0);
+            rigid.velocity = new Vector2(0,0);
         }else if(!onGround){
-            rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
         }
 
     }
