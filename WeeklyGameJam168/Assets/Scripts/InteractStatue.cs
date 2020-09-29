@@ -56,7 +56,6 @@ public class InteractStatue : MonoBehaviour
         if (other.tag == "Player")
         {
             playerTouching = true;
-            Debug.Log("Enter");
         }
     }
 
@@ -65,7 +64,6 @@ public class InteractStatue : MonoBehaviour
         if (other.tag == "Player")
         {
             playerTouching = false;
-            Debug.Log("Exit");
         }
     }
 }
