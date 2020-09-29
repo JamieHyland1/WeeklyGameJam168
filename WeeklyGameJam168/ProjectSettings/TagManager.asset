@@ -8,6 +8,8 @@ TagManager:
   - Spike
   - ScreenFade
   - Statue
+  - Button
+  - Block
   layers:
   - Default
   - TransparentFX

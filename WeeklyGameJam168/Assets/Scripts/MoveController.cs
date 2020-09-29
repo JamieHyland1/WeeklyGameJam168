@@ -17,6 +17,7 @@ public class MoveController : MonoBehaviour
 
     [Range(1,10)]public float runSpeed = 2f;
     Rigidbody2D rigid = new Rigidbody2D();
+    Rigidbody2D blockRigid = new Rigidbody2D();
     SpriteRenderer spriteRenderer;
     public TorchSwitch torchSwitch;
     Animator animator;
@@ -47,7 +48,8 @@ public class MoveController : MonoBehaviour
     public Animator camera;
     Vector2 oldPos;
 
-    void Awake(){
+    void Awake()
+    {
        rigid = this.GetComponent<Rigidbody2D>();
        spriteRenderer = this.GetComponent<SpriteRenderer>();
        animator = this.GetComponent<Animator>();
@@ -106,7 +108,18 @@ public class MoveController : MonoBehaviour
                 }
             }
         }
-
+        if ((Input.GetKey("right") || Input.GetKey("left")) && playerInteract.besideBlock)
+        {
+            blockRigid = GameObject.Find("Block").GetComponent<Rigidbody2D>();
+            animator.SetBool("Pushing",true);
+            blockRigid.constraints = ~RigidbodyConstraints2D.FreezePositionX;
+        }
+        else
+        {
+            blockRigid = GameObject.Find("Block").GetComponent<Rigidbody2D>();
+            animator.SetBool("Pushing", false);
+            blockRigid.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
     }
 
     void FixedUpdate(){
