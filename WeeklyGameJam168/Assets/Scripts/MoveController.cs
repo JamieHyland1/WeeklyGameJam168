@@ -15,7 +15,7 @@ public class MoveController : MonoBehaviour
     Color color;
 
     [Range(1,10)]public float runSpeed = 2f;
-    Rigidbody2D rigidbody;
+    Rigidbody2D rigid = new Rigidbody2D();
     SpriteRenderer spriteRenderer;
 
     Animator animator;
@@ -37,7 +37,7 @@ public class MoveController : MonoBehaviour
     Vector2 oldPos;
 
     void Awake(){
-       rigidbody = this.GetComponent<Rigidbody2D>();
+       rigid = this.GetComponent<Rigidbody2D>();
        spriteRenderer = this.GetComponent<SpriteRenderer>();
        animator = this.GetComponent<Animator>();
        direction = new Vector2();
@@ -86,7 +86,7 @@ public class MoveController : MonoBehaviour
 
         // }else
          if(jumpInput){
-            rigidbody.AddForce(Vector2.up * jumpVelocity,ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.up * jumpVelocity,ForceMode2D.Impulse);
             jumpInput = false;
             animator.SetBool("isJumping",jumpInput);
           
@@ -107,8 +107,8 @@ public class MoveController : MonoBehaviour
         //    rigidbody.gravityScale = 1;
         // }
 
-        animator.SetFloat("Speed",Mathf.Abs(rigidbody.velocity.x));
-        animator.SetFloat("ySpeed",rigidbody.velocity.y);
+        animator.SetFloat("Speed",Mathf.Abs(rigid.velocity.x));
+        animator.SetFloat("ySpeed",rigid.velocity.y);
         
       
     }
@@ -134,12 +134,12 @@ public class MoveController : MonoBehaviour
             animator.SetBool("onGround",onGround);
         }
         if(runInput && (!onWall && !onGround)){
-            rigidbody.velocity = new Vector2(-direction.x*runSpeed,rigidbody.velocity.y);
+            rigid.velocity = new Vector2(-direction.x*runSpeed,rigid.velocity.y);
         }else if(runInput && !onWall){
-            rigidbody.velocity = new Vector2(-direction.x*runSpeed,rigidbody.velocity.y);
+            rigid.velocity = new Vector2(-direction.x*runSpeed,rigid.velocity.y);
 
         }else{
-            rigidbody.velocity = new Vector2(0,rigidbody.velocity.y);
+            rigid.velocity = new Vector2(0,rigid.velocity.y);
         }
 
     }
