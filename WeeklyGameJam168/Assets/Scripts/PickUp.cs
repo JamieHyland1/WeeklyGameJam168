@@ -39,7 +39,6 @@ public class PickUp : MonoBehaviour
         if (other.tag == "Player")
         {
             playerTouching = true;
-            Debug.Log("Enter");
         }
     }
 
@@ -48,7 +47,6 @@ public class PickUp : MonoBehaviour
         if (other.tag == "Player")
         {
             playerTouching = false;
-            Debug.Log("Exit");
         }
     }
 }
