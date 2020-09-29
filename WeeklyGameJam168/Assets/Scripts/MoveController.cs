@@ -15,9 +15,9 @@ public class MoveController : MonoBehaviour
     Color color;
 
     [Range(1,10)]public float runSpeed = 2f;
-    Rigidbody2D rigidbody;
+    Rigidbody2D rigid = new Rigidbody2D();
     SpriteRenderer spriteRenderer;
-
+    public TorchSwitch torchSwitch;
     Animator animator;
     bool jumpInput = false;
 
@@ -25,6 +25,10 @@ public class MoveController : MonoBehaviour
     public bool onGround = true;
 
     public bool wallJumping = false;
+
+    public bool holdingTorch = false;
+
+    PlayerInteract playerInteract;
 
     public Transform groundCheck;
     public Transform groundCheckR;
@@ -37,10 +41,11 @@ public class MoveController : MonoBehaviour
     Vector2 oldPos;
 
     void Awake(){
-       rigidbody = this.GetComponent<Rigidbody2D>();
+       rigid = this.GetComponent<Rigidbody2D>();
        spriteRenderer = this.GetComponent<SpriteRenderer>();
        animator = this.GetComponent<Animator>();
        direction = new Vector2();
+       playerInteract = this.GetComponent<PlayerInteract>();
     }
 
     // Update is called once per frame
@@ -54,7 +59,6 @@ public class MoveController : MonoBehaviour
             runInput = false;
         }
         if(Input.GetButtonDown("Jump") && ((onGround && !onWall) || jumpFrameCounter > 0)){
-            Debug.Log("pressed jump");
             jumpInput = true;
             animator.SetBool("isJumping",jumpInput);
         }
@@ -67,10 +71,27 @@ public class MoveController : MonoBehaviour
             spriteRenderer.flipX = true;
             direction.x = 1;
         }
-    //    Debug.DrawLine(oldPos, debugPos, color, 2.0f);
-    //    Debug.DrawLine(transform.position, new Vector3(debugPos.x + rigidbody.velocity.normalized.x,debugPos.y,debugPos.z),Color.red);
-    //    Debug.DrawLine(transform.position, new Vector3(debugPos.x,debugPos.y + rigidbody.velocity.normalized.y,debugPos.z),Color.green);
-    //    Debug.DrawLine(transform.position, new Vector3(debugPos.x + rigidbody.velocity.normalized.x,debugPos.y + rigidbody.velocity.normalized.y,debugPos.z),Color.cyan);
+
+
+        if(Input.GetKeyDown(KeyCode.F)){
+            if(playerInteract.besideTorch && !holdingTorch){
+                Debug.Log("going to pick up torch");
+                torchSwitch.torchPickup(this.gameObject);
+                holdingTorch = true;
+            }
+            if(playerInteract.besideStatue){
+                var statue = GameObject.FindGameObjectWithTag("Statue");
+                if(holdingTorch){
+                   if(gameObject.name == "Hero")torchSwitch.SwitchTorchParent(this.gameObject,statue,new Vector3(-.6f, .8f, 0));else torchSwitch.SwitchTorchParent(this.gameObject,statue,new Vector3(.6f, .8f, 0));
+                    holdingTorch = false;
+                    statue.GetComponent<Animator>().SetTrigger("Rotating");
+                    GameObject.FindGameObjectWithTag("ScreenFade").GetComponent<ScreenFadeManager>().FlipScreens();
+                }else if(!holdingTorch){
+                    torchSwitch.SwitchTorchParent(this.gameObject,statue, new Vector3(.2f, .2f, 0f));
+                    holdingTorch = true;
+                }
+            }
+        }
     }
 
     void FixedUpdate(){
@@ -86,7 +107,7 @@ public class MoveController : MonoBehaviour
 
         // }else
          if(jumpInput){
-            rigidbody.AddForce(Vector2.up * jumpVelocity,ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.up * jumpVelocity,ForceMode2D.Impulse);
             jumpInput = false;
             animator.SetBool("isJumping",jumpInput);
           
@@ -107,8 +128,8 @@ public class MoveController : MonoBehaviour
         //    rigidbody.gravityScale = 1;
         // }
 
-        animator.SetFloat("Speed",Mathf.Abs(rigidbody.velocity.x));
-        animator.SetFloat("ySpeed",rigidbody.velocity.y);
+        animator.SetFloat("Speed",Mathf.Abs(rigid.velocity.x));
+        animator.SetFloat("ySpeed",rigid.velocity.y);
         
       
     }
@@ -134,12 +155,12 @@ public class MoveController : MonoBehaviour
             animator.SetBool("onGround",onGround);
         }
         if(runInput && (!onWall && !onGround)){
-            rigidbody.velocity = new Vector2(-direction.x*runSpeed,rigidbody.velocity.y);
+            rigid.velocity = new Vector2(-direction.x*runSpeed,rigid.velocity.y);
         }else if(runInput && !onWall){
-            rigidbody.velocity = new Vector2(-direction.x*runSpeed,rigidbody.velocity.y);
+            rigid.velocity = new Vector2(-direction.x*runSpeed,rigid.velocity.y);
 
         }else{
-            rigidbody.velocity = new Vector2(0,rigidbody.velocity.y);
+            rigid.velocity = new Vector2(0,rigid.velocity.y);
         }
 
     }
@@ -152,11 +173,9 @@ public class MoveController : MonoBehaviour
     public void registerHit()
     {
         animator.SetTrigger("hitBySpike");
-        Debug.Log("registering hit");
     }
 
     void OnCollisionEnter2D(Collision2D col){
-        Debug.Log(col.gameObject.tag);
         if(col.gameObject.tag == "movingPlatform"){
             this.gameObject.transform.parent = col.gameObject.transform;
         }

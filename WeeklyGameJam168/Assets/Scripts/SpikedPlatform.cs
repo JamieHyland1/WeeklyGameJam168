@@ -27,8 +27,6 @@ public class SpikedPlatform : MonoBehaviour
         }
   }
 
-
-<<<<<<< block-push
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
