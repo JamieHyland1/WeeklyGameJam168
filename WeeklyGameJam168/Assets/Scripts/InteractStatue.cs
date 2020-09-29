@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class InteractStatue : MonoBehaviour
 {
+    public TorchSwitch TorchSwitch;
     private Animator anim; //create animator
     private Boolean playerTouching = false;
     private GameObject torch;
@@ -33,16 +34,18 @@ public class InteractStatue : MonoBehaviour
     {
        if (Input.GetKeyDown(KeyCode.F) && playerTouching == true && torch.transform.parent == hero1.transform) //when f pressed.
         {
-            torch.transform.position = statue.transform.position + new Vector3(-.6f, .8f, 0);
-            torch.transform.parent = statue.transform;
+            // torch.transform.position = statue.transform.position + new Vector3(-.6f, .8f, 0);
+            // torch.transform.parent = statue.transform;
+           // TorchSwitch.SwitchTorchParent(hero1,this.gameObject);
             anim.SetTrigger("Rotating"); //activates rotating trigger in animator
             GetComponent<ScreenFadeManager>().FlipScreens();
         }
 
        if (Input.GetKeyDown(KeyCode.F) && playerTouching == true && torch.transform.parent == hero2.transform)
         {
-            torch.transform.position = statue.transform.position + new Vector3(-.6f, .8f, 0);
-            torch.transform.parent = statue.transform;
+            // torch.transform.position = statue.transform.position + new Vector3(-.6f, .8f, 0);
+            // torch.transform.parent = statue.transform;
+        //    TorchSwitch.SwitchTorchParent(hero2,this.gameObject);
             anim.SetTrigger("Rotating"); //activates rotating trigger in animator
             GetComponent<ScreenFadeManager>().FlipScreens();
         }

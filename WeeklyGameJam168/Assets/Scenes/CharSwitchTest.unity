@@ -202,6 +202,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cddd36b75f66be048bdf17ab32159da9, type: 3}
+--- !u!1 &74845944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 569480205983220026, guid: dbfd085ec471883449efd85020595a97,
+    type: 3}
+  m_PrefabInstance: {fileID: 166937744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &110583301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -690,6 +696,50 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 116746128}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &493531415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 493531416}
+  - component: {fileID: 493531417}
+  m_Layer: 0
+  m_Name: TorchSwitch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &493531416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493531415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2060335539}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &493531417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493531415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed1e6bb1ee27e846adcf8d3f711fcc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torch: {fileID: 74845944}
 --- !u!4 &506847348 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3469996316398769522, guid: ac45d9dba86940649adfe357dac6702e,
@@ -2231,6 +2281,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1224882606}
+  - {fileID: 493531416}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2247,6 +2298,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2445140288511744995, guid: 564a02f3f3a791741805d1a04a8ac17e,
+        type: 3}
+      propertyPath: torchSwitch
+      value: 
+      objectReference: {fileID: 493531417}
+    - target: {fileID: 2445140288511744995, guid: 564a02f3f3a791741805d1a04a8ac17e,
+        type: 3}
+      propertyPath: TorchSwitch
+      value: 
+      objectReference: {fileID: 493531417}
     - target: {fileID: 2445140288511744996, guid: 564a02f3f3a791741805d1a04a8ac17e,
         type: 3}
       propertyPath: m_Offset.x
