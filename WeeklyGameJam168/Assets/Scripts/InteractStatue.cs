@@ -13,37 +13,56 @@ public class InteractStatue : MonoBehaviour
     private Boolean playerTouching = false;
     private GameObject torch;
     private GameObject statue;
-    private GameObject hero;
+    private GameObject hero1;
+    private GameObject hero2;
 
     void Awake()
     {
         anim = GetComponent<Animator>(); //set animator to parents animator
-        hero = GameObject.Find("Hero");
+    }
+
+    void Start()
+    {
+        hero1 = GameObject.Find("Hero");
+        hero2 = GameObject.Find("Hero 2");
         statue = GameObject.Find("Statue");
         torch = GameObject.Find("Torch");
     }
 
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.F) && playerTouching == true) //when f pressed.
+       if (Input.GetKeyDown(KeyCode.F) && playerTouching == true && torch.transform.parent == hero1.transform) //when f pressed.
         {
-            if (torch.transform.IsChildOf(hero.transform))
-            {
-                torch.transform.position = statue.transform.position + new Vector3(-2.7f, +3.1f, 0);
-                torch.transform.parent = statue.transform;
-                anim.SetTrigger("Rotating"); //activates rotating trigger in animator
-                GameObject.FindGameObjectWithTag("ScreenFade").GetComponent<ScreenFadeManager>().FlipScreens();
-            }
+            torch.transform.position = statue.transform.position + new Vector3(-.6f, .8f, 0);
+            torch.transform.parent = statue.transform;
+            anim.SetTrigger("Rotating"); //activates rotating trigger in animator
+            GetComponent<ScreenFadeManager>().FlipScreens();
+        }
+
+       if (Input.GetKeyDown(KeyCode.F) && playerTouching == true && torch.transform.parent == hero2.transform)
+        {
+            torch.transform.position = statue.transform.position + new Vector3(-.6f, .8f, 0);
+            torch.transform.parent = statue.transform;
+            anim.SetTrigger("Rotating"); //activates rotating trigger in animator
+            GetComponent<ScreenFadeManager>().FlipScreens();
+        }
+    }
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            playerTouching = true;
+            Debug.Log("Enter");
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerExit2D(Collider2D other)
     {
-        playerTouching = true;
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        playerTouching = false;
+        if (other.tag == "Player")
+        {
+            playerTouching = false;
+            Debug.Log("Exit");
+        }
     }
 }
