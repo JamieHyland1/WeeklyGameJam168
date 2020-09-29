@@ -27,7 +27,7 @@ public class PickUp : MonoBehaviour
  
         if (Input.GetKeyDown(KeyCode.F) && playerTouching == true && hero2.GetComponent<MoveController>().enabled == true && this.transform.parent != hero2.transform) //when f pressed.
         {
-            Debug.Log("Pickup2" + this.transform.parent);
+             Debug.Log("Pickup2" + this.transform.parent);
             this.transform.position = hero2.transform.position + new Vector3(.2f, .2f, 0f);
             this.transform.parent = null;
             this.transform.parent = hero2.transform;
