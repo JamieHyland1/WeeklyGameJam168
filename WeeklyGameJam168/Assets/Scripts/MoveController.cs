@@ -48,6 +48,8 @@ public class MoveController : MonoBehaviour
     public Animator camera;
     Vector2 oldPos;
 
+    public GameObject TikiTorch;
+
     void Awake()
     {
        rigid = this.GetComponent<Rigidbody2D>();
@@ -90,8 +92,12 @@ public class MoveController : MonoBehaviour
 
 
         if(Input.GetKeyDown(KeyCode.F)){
+            if(playerInteract.besideTikiTorch && holdingTorch){
+                Debug.Log("at tiki torch");
+                TikiTorch.GetComponent<Animator>().SetTrigger("LightTorch");
+                TikiTorch.GetComponent<Torch>().torchLit = true;
+            }
             if(playerInteract.besideTorch && !holdingTorch){
-                Debug.Log("going to pick up torch");
                 torchSwitch.torchPickup(this.gameObject);
                 holdingTorch = true;
             }
@@ -108,18 +114,18 @@ public class MoveController : MonoBehaviour
                 }
             }
         }
-        if ((Input.GetKey("right") || Input.GetKey("left")) && playerInteract.besideBlock)
-        {
-            blockRigid = GameObject.Find("Block").GetComponent<Rigidbody2D>();
-            animator.SetBool("Pushing",true);
-            blockRigid.constraints = ~RigidbodyConstraints2D.FreezePositionX;
-        }
-        else
-        {
-            blockRigid = GameObject.Find("Block").GetComponent<Rigidbody2D>();
-            animator.SetBool("Pushing", false);
-            blockRigid.constraints = RigidbodyConstraints2D.FreezeAll;
-        }
+        // if ((Input.GetKey("right") || Input.GetKey("left")) && playerInteract.besideBlock)
+        // {
+        //     blockRigid = GameObject.Find("Block").GetComponent<Rigidbody2D>();
+        //     animator.SetBool("Pushing",true);
+        //     blockRigid.constraints = ~RigidbodyConstraints2D.FreezePositionX;
+        // }
+        // else
+        // {
+        //     blockRigid = GameObject.Find("Block").GetComponent<Rigidbody2D>();
+        //     animator.SetBool("Pushing", false);
+        //     blockRigid.constraints = RigidbodyConstraints2D.FreezeAll;
+        // }
     }
 
     void FixedUpdate(){
