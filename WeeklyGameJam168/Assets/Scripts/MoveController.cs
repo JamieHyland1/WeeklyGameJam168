@@ -45,7 +45,7 @@ public class MoveController : MonoBehaviour
 
     private bool justLanded = true;
 
-    public Animator camera;
+    //public Animator camera;
     Vector2 oldPos;
 
     public GameObject TikiTorch;
@@ -114,18 +114,15 @@ public class MoveController : MonoBehaviour
                 }
             }
         }
-        // if ((Input.GetKey("right") || Input.GetKey("left")) && playerInteract.besideBlock)
-        // {
-        //     blockRigid = GameObject.Find("Block").GetComponent<Rigidbody2D>();
-        //     animator.SetBool("Pushing",true);
-        //     blockRigid.constraints = ~RigidbodyConstraints2D.FreezePositionX;
-        // }
-        // else
-        // {
-        //     blockRigid = GameObject.Find("Block").GetComponent<Rigidbody2D>();
-        //     animator.SetBool("Pushing", false);
-        //     blockRigid.constraints = RigidbodyConstraints2D.FreezeAll;
-        // }
+
+        if ((Input.GetKey("right") || Input.GetKey("left")) && playerInteract.besideBlock)
+        {
+            animator.SetBool("Pushing",true);
+        }
+        else
+        {
+            animator.SetBool("Pushing", false);
+        }
     }
 
     void FixedUpdate(){
@@ -188,7 +185,7 @@ public class MoveController : MonoBehaviour
     private void LateUpdate() {
          if(!justLanded && onGround){
              justLanded = true;
-                camera.SetTrigger("Shake");
+            //    GetComponent<Camera>().SetTrigger("Shake");
         }
     }
     void setTrailColor(){
