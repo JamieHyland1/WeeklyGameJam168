@@ -14,13 +14,21 @@ public class PlayerInteract : MonoBehaviour
        if(other.gameObject.name == "Torch")besideTorch = true;
        if(other.gameObject.name == "TikiTorch")besideTikiTorch = true;
        if(other.gameObject.name == "Statue")besideStatue = true;
-       if(other.gameObject.name == "Block") besideBlock = true;
+        if (other.gameObject.tag == "Block")
+        {
+            besideBlock = true;
+            other.gameObject.GetComponent<Rigidbody2D>().constraints = ~RigidbodyConstraints2D.FreezePositionX;
+        }
     }
    private void OnTriggerExit2D(Collider2D other)
     {
        if(other.gameObject.name == "Torch")besideTorch = false;
        if(other.gameObject.name == "TikiTorch")besideTikiTorch = false;
        if(other.gameObject.name == "Statue")besideStatue = false;
-       if (other.gameObject.name == "Block") besideBlock = false;
+        if (other.gameObject.tag == "Block")
+        {
+            besideBlock = false;
+            other.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
     }
 }
