@@ -531,9 +531,14 @@ MonoBehaviour:
   jumpFrames: 3
   jumpFrameCounter: 0
   runSpeed: 4
+  torchSwitch: {fileID: 4788651686645102789, guid: 7a6c05ba77d850946b48c57df728f6f0,
+    type: 3}
   onWall: 0
   onGround: 1
+  jumpDust: {fileID: 6868972916476648773, guid: 8862f12d99fecf44098668bdd556ed4c,
+    type: 3}
   wallJumping: 0
+  holdingTorch: 0
   groundCheck: {fileID: 4892999197789905549}
   groundCheckR: {fileID: 4892999199345017441}
   groundCheckL: {fileID: 4892999198267794225}
@@ -576,6 +581,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ede9f81f987f24f8c0e640cc9d93be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  besideTorch: 0
+  besideTikiTorch: 0
+  besideStatue: 0
+  besideBlock: 0
 --- !u!1 &4892999199345017440
 GameObject:
   m_ObjectHideFlags: 0
