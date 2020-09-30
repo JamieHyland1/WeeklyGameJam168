@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class SwitchChar : MonoBehaviour
 {
-    private GameObject hero1;
-    private GameObject hero2;
+    public GameObject hero1;
+    public GameObject hero2;
 
     void Start()
     {
