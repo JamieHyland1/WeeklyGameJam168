@@ -539,11 +539,13 @@ MonoBehaviour:
     type: 3}
   wallJumping: 0
   holdingTorch: 0
+  holdingKey: 0
   groundCheck: {fileID: 4892999197789905549}
   groundCheckR: {fileID: 4892999199345017441}
   groundCheckL: {fileID: 4892999198267794225}
   wallCheckR: {fileID: 4892999199077116897}
   wallCheckL: {fileID: 4892999198014847519}
+  key: {fileID: 0}
   TikiTorch: {fileID: 0}
 --- !u!114 &9151316921695734063
 MonoBehaviour:
@@ -588,6 +590,7 @@ MonoBehaviour:
   besideTikiTorch: 0
   besideStatue: 0
   besideBlock: 0
+  besideKey: 0
   besideDoor: 0
 --- !u!1 &4892999199345017440
 GameObject:

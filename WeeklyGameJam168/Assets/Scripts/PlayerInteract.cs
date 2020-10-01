@@ -8,13 +8,24 @@ public class PlayerInteract : MonoBehaviour
     public bool besideTikiTorch = false;
     public bool besideStatue = false;
     public bool besideBlock = false;
-
+    public bool besideKey = false;
     public bool besideDoor = false;
+
+    void Start()
+    {
+        besideTorch = false;
+        besideTikiTorch = false;
+        besideStatue = false;
+        besideBlock = false;
+        besideKey = false;
+        besideDoor = false;
+    }
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
        if(other.gameObject.name == "Torch")besideTorch = true;
-       if(other.gameObject.name == "TikiTorch" || other.gameObject.name == "TikiTorchLeft" || other.gameObject.name == "TikiTorchRight")besideTikiTorch = true;
+       if (other.gameObject.tag == "Key") besideKey = true;
+       if (other.gameObject.name == "TikiTorch" || other.gameObject.name == "TikiTorchLeft" || other.gameObject.name == "TikiTorchRight")besideTikiTorch = true;
        if(other.gameObject.name == "Statue")besideStatue = true;
        if(other.gameObject.name == "door")besideDoor = true;
        if(other.gameObject.tag == "Spike"){
@@ -29,7 +40,8 @@ public class PlayerInteract : MonoBehaviour
    private void OnTriggerExit2D(Collider2D other)
     {
        if(other.gameObject.name == "Torch")besideTorch = false;
-        if(other.gameObject.name == "TikiTorch" || other.gameObject.name == "TikiTorchLeft" || other.gameObject.name == "TikiTorchRight")besideTikiTorch = false;
+        if (other.gameObject.tag == "Key") besideKey = false;
+        if (other.gameObject.name == "TikiTorch" || other.gameObject.name == "TikiTorchLeft" || other.gameObject.name == "TikiTorchRight")besideTikiTorch = false;
        if(other.gameObject.name == "Statue")besideStatue = false;
         if(other.gameObject.name == "door")besideDoor = false;
         if (other.gameObject.tag == "Block")

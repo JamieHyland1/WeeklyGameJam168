@@ -11,6 +11,7 @@ TagManager:
   - Torch
   - Button
   - Block
+  - Key
   layers:
   - Default
   - TransparentFX

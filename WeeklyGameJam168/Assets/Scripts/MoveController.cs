@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class MoveController : MonoBehaviour
@@ -31,6 +32,7 @@ public class MoveController : MonoBehaviour
     public bool wallJumping = false;
 
     public bool holdingTorch = false;
+    public bool holdingKey = false;
 
     PlayerInteract playerInteract;
 
@@ -44,6 +46,8 @@ public class MoveController : MonoBehaviour
     private Vector2 direction;
 
     private bool justLanded = true;
+
+    public GameObject key;
 
     //public Animator camera;
     Vector2 oldPos;
@@ -89,32 +93,52 @@ public class MoveController : MonoBehaviour
             direction.x = 1;
         }
 
-
-
-        if(Input.GetKeyDown(KeyCode.F)){
-            if(playerInteract.besideTikiTorch && holdingTorch){
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            if (playerInteract.besideTikiTorch && holdingTorch)
+            {
                 Debug.Log("at tiki torch");
                 TikiTorch.GetComponent<Animator>().SetTrigger("LightTorch");
                 TikiTorch.GetComponent<Torch>().torchLit = true;
             }
-            if(playerInteract.besideTorch && !holdingTorch){
+
+            if(playerInteract.besideTorch && !holdingTorch)
+            {
+                
                 torchSwitch.torchPickup(this.gameObject);
                 holdingTorch = true;
             }
+
             if(playerInteract.besideStatue){
                 var statue = GameObject.FindGameObjectWithTag("Statue");
-                if(holdingTorch){
-                   if(gameObject.name == "Hero")torchSwitch.SwitchTorchParent(this.gameObject,statue,new Vector3(-.6f, .8f, 0));else torchSwitch.SwitchTorchParent(this.gameObject,statue,new Vector3(.6f, .8f, 0));
+
+                if (holdingTorch)
+                {
+                    if (gameObject.name == "Hero")
+                    {
+                        torchSwitch.SwitchTorchParent(this.gameObject, statue, new Vector3(-.6f, .8f, 0));
+                    }
+                    else 
+                    {
+                        torchSwitch.SwitchTorchParent(this.gameObject, statue, new Vector3(.6f, .8f, 0));
+                    }
                     holdingTorch = false;
                     statue.GetComponent<Animator>().SetTrigger("Rotating");
                     GameObject.FindGameObjectWithTag("ScreenFade").GetComponent<ScreenFadeManager>().FlipScreens();
-                }else if(!holdingTorch){
+                }
+                else if(!holdingTorch && torchSwitch.getTorchParent()==statue.transform)
+                {
                     torchSwitch.SwitchTorchParent(this.gameObject,statue, new Vector3(.2f, .2f, 0f));
                     holdingTorch = true;
                 }
             }
+            if (playerInteract.besideKey && !holdingKey)
+            {
+                key= GameObject.FindGameObjectWithTag("Key");
+                key.SetActive(false);
+                holdingKey = true;
+            }
         }
-
         if ((Input.GetKey("right") || Input.GetKey("left")) && playerInteract.besideBlock)
         {
             animator.SetBool("Pushing",true);
@@ -146,9 +170,6 @@ public class MoveController : MonoBehaviour
       
         animator.SetFloat("Speed",Mathf.Abs(rigid.velocity.x));
         animator.SetFloat("ySpeed",rigid.velocity.y);
-
-        
-      
     }
 
     void checkWallsAndFloor(){
