@@ -132,9 +132,10 @@ public class MoveController : MonoBehaviour
                     holdingTorch = true;
                 }
             }
+
             if (playerInteract.besideKey && !holdingKey)
             {
-                key= GameObject.FindGameObjectWithTag("Key");
+                key = GameObject.FindGameObjectWithTag("Key");
                 key.SetActive(false);
                 holdingKey = true;
             }
