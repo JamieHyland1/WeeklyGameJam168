@@ -11,16 +11,6 @@ public class PlayerInteract : MonoBehaviour
     public bool besideKey = false;
     public bool besideDoor = false;
 
-    void Start()
-    {
-        besideTorch = false;
-        besideTikiTorch = false;
-        besideStatue = false;
-        besideBlock = false;
-        besideKey = false;
-        besideDoor = false;
-    }
-
     private void OnTriggerEnter2D(Collider2D other) 
     {
        if(other.gameObject.name == "Torch")besideTorch = true;
@@ -47,7 +37,8 @@ public class PlayerInteract : MonoBehaviour
         if (other.gameObject.tag == "Block")
         {
             besideBlock = false;
-            other.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            other.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+            other.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 }
