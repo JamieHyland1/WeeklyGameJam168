@@ -539,11 +539,14 @@ MonoBehaviour:
     type: 3}
   wallJumping: 0
   holdingTorch: 0
+  holdingKey: 0
   groundCheck: {fileID: 4892999197789905549}
   groundCheckR: {fileID: 4892999199345017441}
   groundCheckL: {fileID: 4892999198267794225}
   wallCheckR: {fileID: 4892999199077116897}
   wallCheckL: {fileID: 4892999198014847519}
+  key: {fileID: 0}
+  TikiTorch: {fileID: 0}
 --- !u!114 &9151316921695734063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,6 +572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3797304000dce4478f3e3725d9c547b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hero1: {fileID: 0}
+  hero2: {fileID: 0}
 --- !u!114 &1181354046423106154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,6 +590,8 @@ MonoBehaviour:
   besideTikiTorch: 0
   besideStatue: 0
   besideBlock: 0
+  besideKey: 0
+  besideDoor: 0
 --- !u!1 &4892999199345017440
 GameObject:
   m_ObjectHideFlags: 0
