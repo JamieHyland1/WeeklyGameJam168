@@ -77,6 +77,7 @@ public class MoveController : MonoBehaviour
             jumpInput = true;
             animator.SetBool("isJumping",jumpInput);
             Vector2 dustPost = transform.position;
+            this.GetComponent<AudioSource>().Play();
             dustPost.y += 0.25f;
             var dust = Instantiate(jumpDust,dustPost,Quaternion.identity);
             dust.GetComponent<Animation>().Play();
