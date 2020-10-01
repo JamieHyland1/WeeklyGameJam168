@@ -128,9 +128,9 @@ public class MoveController : MonoBehaviour
     void FixedUpdate(){
        oldPos = transform.position;
        if(runInput && !onGround){
-           RaycastHit2D hitTop = Physics2D.Raycast(wallCheckR.transform.position, -direction,0.2f,1<<8);
-           RaycastHit2D hitMid = Physics2D.Raycast(transform.position, -direction,0.2f,1<<8);
-           RaycastHit2D hitLow = Physics2D.Raycast(groundCheck.transform.position, -direction,0.2f,1<<8);
+           RaycastHit2D hitTop = Physics2D.Raycast(wallCheckR.transform.position, -direction,0.3f,1<<8);
+           RaycastHit2D hitMid = Physics2D.Raycast(transform.position, -direction,0.3f,1<<8);
+           RaycastHit2D hitLow = Physics2D.Raycast(groundCheck.transform.position, -direction,0.3f,1<<8);
             if(hitTop.collider != null || hitMid.collider != null || hitLow.collider != null){
                 runInput = false;
            }
